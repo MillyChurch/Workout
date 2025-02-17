@@ -10,21 +10,9 @@ CREATE TABLE TiposDeUsuario (
 INSERT INTO TiposDeUsuario (nomeTipo)
 VALUES ("Professor"),("Aluno");
 
-CREATE TABLE TiposDePlano (
-    idPlano INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-    nomePlano VARCHAR(100) NOT NULL
-);
-INSERT INTO TiposDePlano (nomePlano)
-VALUES ("Mensal"),("Anual"), ("Trimestral");
-
 CREATE TABLE Aluno (
     idAluno INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
     nomeAluno VARCHAR(100) NOT NULL,
-    tipoDePlano INT NOT NULL,
-	ultimoPagamentoAluno DATE NOT NULL,
-	dataVencimentoAluno DATE NOT NULL,
-	statusPagamentoAluno BOOLEAN NOT NULL,
-    FOREIGN KEY (tipoDePlano) REFERENCES TiposDePlano(idPlano)
 );
 
 CREATE TABLE Professor (
@@ -33,7 +21,7 @@ CREATE TABLE Professor (
 );
 
 CREATE TABLE Usuario (
-	idUsuario INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
+	idUsuario INT NOT NULL PRIMARY KEY, 
     loginUsuario VARCHAR(100) NOT NULL,
 	senhaUsuario VARCHAR(100) NOT NULL,
 	idTipo INT NOT NULL,

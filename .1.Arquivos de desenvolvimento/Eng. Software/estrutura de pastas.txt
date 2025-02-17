@@ -1,0 +1,6 @@
+As estruturas do projeto django se baseiam no modelo MTV (Paralelo com MVC)
+
+M - MODEL (Model): São todos os dados da minha aplicação
+T - TEMPLATE (View): Os arquivos html que irão ser mostrados para o usuário
+V - VIEW (Controller): Onde o django recebe requisições e devolve os arquivos do template para o usuário,
+integrando-os com os models
