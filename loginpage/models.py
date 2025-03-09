@@ -12,5 +12,5 @@ class Usuario(models.Model):
     senhaUsuario = models.CharField(max_length=100, null=False, blank=False)
     idTipo = models.ForeignKey(TiposDeUsuario, on_delete=models.CASCADE)
     idAluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, null=True, blank=True)
-    idProfessor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    idProfessor = models.ForeignKey(Professor, on_delete=models.CASCADE, null=True, blank=True)
 
