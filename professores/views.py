@@ -12,5 +12,4 @@ def professorPage(request):
     if not token or token != token_salvo:
         return redirect("login")
 
-    del request.session['token_protegido']
     return render(request, "professor.html")

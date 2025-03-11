@@ -1,3 +1,14 @@
 <h1>Olá, {{nome}}</h1>
 <ul>Treinos
+
+    
+    {% for dia, treino_lista in treinos.items %} 
+    <ul>{{ dia }}
+        {% for treino in treino_lista %}
+        <li>{{ treino }}</li>
+        {% endfor %}
+        <br>
+    </ul>
+    {% endfor %}
+
 </ul>
