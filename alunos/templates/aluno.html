@@ -1,14 +1,81 @@
-<h1>Olá, {{nome}}</h1>
-<ul>Treinos
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    
-    {% for dia, treino_lista in treinos.items %} 
-    <ul>{{ dia }}
-        {% for treino in treino_lista %}
-        <li>{{ treino }}</li>
-        {% endfor %}
-        <br>
-    </ul>
-    {% endfor %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-</ul>
+    <style>
+        .form-container{max-width: 300px; padding-top: 15vh;}
+        .logo{height:60px; display: block; margin: auto;}
+        header{display: block; margin: auto;}
+        body{background-color: black;}
+        form{color: white;}
+        .info{color: green;}
+        .erro{color: red;}
+        .selecione {max-width: 30vh;}
+        .lista{max-width: 30vh;}
+        .pad{margin-bottom: 2vh;}
+        .left{display: block; margin: auto;}
+        .center{width: 50%; background-color: rgb(26, 226, 110);}
+        .right{width: 25%; background-color: rgb(255, 0, 200);}
+        .secoes{display: flex; margin-top: 3%;}
+        .dia_nome{display: block; margin: auto;}
+        .botao_adicionar{width: 30vh;}
+        .novo_treino{color: black;}
+        .seriesrep{display: flex;}
+        .exe{max-width: 100%;}
+        .sdiv, .rdiv{width: 50%;}
+    </style>
+
+    <title>Planos</title>
+  </head>
+
+  <body class="py-4">
+
+    <header>
+        <img class="logo" src="https://iili.io/32hjVup.png">
+    </header>
+
+    <div class="secoes">
+      <section class="left ">
+        <form class="dia_nome" action="{% url 'aluno_page' %}?token={{ token }}" method="post">{% csrf_token %}
+
+            <select onchange="this.form.submit()" name="dia" type="submit" class="form-select selecione pad" aria-label="Default select example">
+              <option value="1" {% if dia_selecionado == "1" %}selected{% endif %} >Segunda</option>
+              <option value="2" {% if dia_selecionado == "2" %}selected{% endif %} >Terça</option>
+              <option value="3" {% if dia_selecionado == "3" %}selected{% endif %} >Quarta</option>
+              <option value="4" {% if dia_selecionado == "4" %}selected{% endif %} >Quinta</option>
+              <option value="5" {% if dia_selecionado == "5" %}selected{% endif %} >Sexta</option>
+              <option value="6" {% if dia_selecionado == "6" %}selected{% endif %} >Sábado</option>
+              <option value="7" {% if dia_selecionado == "7" %}selected{% endif %} >Domingo</option>
+          </select>
+
+          
+          <div class="list-group lista pad">
+            {% for treino in treinos %}
+              <button type="button" value={{treino}} class="list-group-item list-group-item-action"
+              data-toggle="modal" data-target="#exampleModal">
+              {{treino.exercicio.nomeExercicio}},
+              Séries: {{treino.series}},
+              Repetições: {{treino.repeticoes}},
+              OBS: {{treino.observacoes}}
+              </button>
+            {% endfor %}
+          </div>
+          
+        </form>
+
+    </section>
+
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+
+</html>
+
+
+

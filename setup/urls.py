@@ -25,6 +25,11 @@ urlpatterns = [
     path("login/", loginpage.views.login_screen, name="login"),
     path("aluno/", alunos.views.alunoPage, name="aluno_page"),
     path("professor/", professores.views.professorPage, name="professor_page"),
+    path("professor/cadastrarExercicio", professores.views.cadastrar_exercicio_page, name="cadastrar_exercicio_page"),
+    path("professor/planos", professores.views.plano_de_treino_page, name="planos"),
+    path("professor/planos/novo_treino", professores.views.plano_de_treino_page, name="novo_treino"),
+    path("professor/planos/editar_treino", professores.views.plano_de_treino_page, name="editar_treino"),
+    path("professor/planos/deletar_treino", professores.views.plano_de_treino_page, name="deletar_treino")
     # path("pagina_aluno", loginpage.views.login_screen, name="login"),
     # path("pagina_professor", loginpage.views.login_screen, name="login"),
 ]
