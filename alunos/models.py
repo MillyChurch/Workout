@@ -7,9 +7,3 @@ class Aluno(models.Model):
     
 
 
-# CREATE TABLE Aluno (
-#     idAluno INT NOT NULL PRIMARY KEY AUTO_INCREMENT, 
-#     nomeAluno VARCHAR(100) NOT NULL,
-#     tipoDePlano INT NOT NULL,
-#     FOREIGN KEY (tipoDePlano) REFERENCES TiposDePlano(idPlano)
-# );    
