@@ -124,6 +124,47 @@
             });
             </script>
 
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                const treinoBotoes = document.querySelectorAll(".treinos");
+
+              treinoBotoes.forEach(botao => {
+                  botao.addEventListener("click", function () {
+                      let treinoId = this.getAttribute("data-id");
+                      let alunoSelecionado = document.querySelector("select[name='aluno']").value;
+                      let diaSelecionado = document.querySelector("select[name='dia']").value;
+
+                      let textoTreino = this.textContent.trim().split(",");
+                      let nomeExercicio = textoTreino[0].trim();
+                      let series = textoTreino[1].match(/\d+/)[0];
+                      let repeticoes = textoTreino[2].match(/\d+/)[0];
+                      let observacoes = textoTreino.length > 3 ? textoTreino[3].replace("OBS:", "").trim() : "";
+
+                      document.getElementById("save_treino").value = treinoId;
+                      document.getElementById("save_aluno_1").value = alunoSelecionado;
+                      document.getElementById("save_dia_1").value = diaSelecionado;
+                      document.getElementById("save_treino1").value = treinoId;
+                      document.getElementById("save_aluno_2").value = alunoSelecionado;
+                      document.getElementById("save_dia_2").value = diaSelecionado;
+                      
+                      let selectExercicio = document.querySelector("select[name='exercicio']");
+                      let selectSeries = document.querySelector("select[name='series']");
+                      let selectReps = document.querySelector("select[name='reps']");
+                      let obsTextArea = document.querySelector("textarea[name='obs']");
+                      for (let option of selectExercicio.options) {
+                          if (option.textContent.trim() === nomeExercicio) {
+                              option.selected = true;
+                              break;
+                          }
+                      }
+                      selectSeries.value = series;
+                      selectReps.value = repeticoes;
+                      obsTextArea.value = observacoes;
+                  });
+              });
+          });
+            </script>
+
 
 
 

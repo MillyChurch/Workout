@@ -11,7 +11,7 @@ from .dao import *
 def professorPage(request):
 
     if(verifica_se_logado(request)):
-        professor_id = request.session.get('id')
+        professor_id = request.session.get('id_professor')
         professor = Professor.objects.get(id=professor_id)
         professor_dados = {
             "nome": professor.nomeProfessor,
@@ -50,7 +50,7 @@ def plano_de_treino_page(request):
 
     info = ""
     erro = ""
-    id_professor =request.session['id']
+    id_professor = request.session.get('id_professor')
 
     if(verifica_se_logado(request)):
 
@@ -61,7 +61,6 @@ def plano_de_treino_page(request):
 
         if request.method == "POST":
             
-            print(request.path)
             if(request.path == "/professor/planos/novo_treino"):
                 novo_treino(request)
             elif(request.path == "/professor/planos/editar_treino"):
@@ -123,4 +122,8 @@ def verifica_se_logado(request):
     if not token or token != token_salvo:
         return False
     
+    if request.session.get('id_tipo') != 2:
+        return False
+
     return True
+

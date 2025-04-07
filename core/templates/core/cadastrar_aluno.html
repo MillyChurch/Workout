@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .form-container{max-width: 300px; padding-top: 15vh;}
+        .logo{height:60px; display: block; margin: auto;}
+        header{display: block; margin: auto;}
+        body{background-color: black;}
+        form{color: white;}
+        .info{color: green;}
+        .erro{color: red;}
+    </style>
+
+    <title>Novo Aluno</title>
+  </head>
+
+  <body class="py-4">
+    <header>
+        <img class="logo" src="https://iili.io/32hjVup.png">
+    </header>
+    <main class="form-container m-auto">
+
+        <form action="{% url 'novoAluno' %}?token={{ token }}" method="post">{% csrf_token %}
+
+          <div class="mb-3" >
+            <label class="form-label">Nome do Aluno</label>
+            <input type="text" class="form-control" name="nomeAluno" value={{nome}}>
+            <div class="erro">{{nome_erro}}</div>
+          </div>
+          <div class="mb-3" >
+            <label class="form-label">CPF do Aluno</label>
+            <input type="text" class="form-control" name="cpfAluno" value={{cpf}}>
+            <div class="erro">{{cpf_erro}}</div>
+          </div>
+          <div class="mb-3" >
+            <label class="form-label">Professor Responsável</label>
+            <select name="profResp" class="form-select" aria-label="Default select example">
+              {% for prof in professores %}
+              <option value={{prof.id}}>{{prof.nomeProfessor}}</option>
+              {%endfor%}
+            </select>
+          </div>
+          <div class="mb-3" >
+            <label class="form-label">Login</label >
+            <input type="text" class="form-control" name="loginAluno" value={{login}}>
+            <div class="erro">{{login_erro}}</div>
+          </div>
+          <div class="mb-3" >
+            <label class="form-label">Senha</label>
+            <input type="text" class="form-control" name="senhaAluno" value="{{senha}}">
+            <div class="erro">{{senha_erro}}</div>
+          </div>
+          
+
+            <button type="submit" class="btn btn-primary">Cadastrar Aluno</button>
+        </form>
+
+        
+
+    </main>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+
+</html>
+
+
+

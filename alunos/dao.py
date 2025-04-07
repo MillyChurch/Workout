@@ -19,3 +19,16 @@ def retornar_treinos_de_um_aluno(aluno: Aluno):
         
 
     return treinos_da_semana
+
+def novoAluno(nome: str, cpf: str):
+    aluno = Aluno(nomeAluno = nome, cpfAluno = cpf)
+    aluno.save()
+    return aluno.id
+
+
+def verifica_se_existe_aluno_com_o_cpf(cpf: str):
+    return Aluno.objects.filter(cpfAluno=cpf).exists()
+
+def deletar_aluno(id: int):
+    aluno = Aluno.objects.get(id=id)
+    aluno.delete()

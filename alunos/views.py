@@ -10,13 +10,15 @@ def alunoPage(request):
     token = request.GET.get('token')
     token_salvo = request.session.get('token_protegido')
 
-    if not token or token != token_salvo:
+    if not token or token != token_salvo or request.session.get('id_tipo') != 1:
          return redirect("login")
 
     
-    aluno_id = request.session.get('id')
+    aluno_id = request.session.get('id_aluno')
     aluno = Aluno.objects.get(id=aluno_id)
     dia = request.POST.get("dia")
+    if(not dia ):
+         dia = 1
     aluno_dados = {
         "token" : token_salvo,
         "nome": aluno.nomeAluno,

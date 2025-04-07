@@ -23,3 +23,15 @@ def listar_alunos(professor_id:str):
     alunos = Aluno.objects.filter(id__in=planos.values_list('idAluno',
                                                             flat=True))
     return alunos
+
+def novo_prof(nome: str, cpf:str):
+    prof = Professor(nomeProfessor = nome, cpfProfessor = cpf)
+    prof.save()
+    return prof.id
+
+def verifica_se_existe_professor_com_o_cpf(cpf: str):
+    return Professor.objects.filter(cpfProfessor=cpf).exists()
+
+def deletar_prof(id: int):
+    prof = Professor.objects.get(id=id)
+    prof.delete()

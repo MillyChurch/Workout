@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .container{padding-top: 25vh;}
+        .logo{height:60px; display: block; margin: auto;}
+        header{display: block; margin: auto;}
+        body{background-color: black;}
+        h1{text-align:center; color: white; display: block; margin: auto;}
+        button{width: 100%; margin-bottom: 2vh;}
+        select{max-width: 50vh; margin-bottom: 2vh;}
+        main{display: flex;}
+        .sec{display: block; margin: auto; margin-top: 20vh;}
+        .delete{background-color: red;}
+        .delete:hover{background-color: rgb(215, 6, 6);}
+        
+    </style>
+
+    <title>Professores</title>
+  </head>
+
+  <body class="py-4">
+    <header>
+        <img class="logo" src="https://iili.io/32hjVup.png">
+    </header>
+
+    <h1 class="text-wrap">Painel de gerenciamento </h1>
+    
+    <main>
+
+      <div class="sec">
+          <form  id="delecao" action="{% url 'deletarProfessor'%}?token={{ token }}" method="post">{% csrf_token %}
+
+            <select name="profs" class="form-select" aria-label="Default select example">
+              {% for prof in professores %}
+              <option value={{prof.id}}>Nome: {{prof.nomeProfessor}} CPF: {{prof.cpfProfessor}}</option>
+              {%endfor%}
+
+            </select>
+            </form>
+
+            <button data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-primary delete">Deletar Professor</button>
+
+            <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="confirmModalLabel">Confirmar Exclusão</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                          Tem certeza que deseja excluir?
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          <button type="button" class="btn btn-danger" id="confirmDelete">Sim, excluir</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <script>
+            document.getElementById("confirmDelete").addEventListener("click", function() {
+                document.getElementById("delecao").submit();
+            });
+            </script>
+
+            <a href="{% url 'adicionarProfessor'%}?token={{ token }}"><button  class="btn btn-primary">Novo Professor</button></a>
+        </div>
+        </main>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+  </body>
+</html>
+
+
+

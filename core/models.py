@@ -6,9 +6,8 @@ from alunos.models import Aluno
 
 class PlanoDeTreino(models.Model):
     idAluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
-    idProfessor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    idProfessor = models.ForeignKey(Professor, on_delete=models.SET_NULL, null=True)
     dataInicio = models.DateField()
-    dataFim = models.DateField()
 
 class Musculo(models.Model):
     nomeMusculo = models.CharField(max_length=100, null=False, blank=False)

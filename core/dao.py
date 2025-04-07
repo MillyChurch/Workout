@@ -1,4 +1,6 @@
 from .models import *
+from datetime import date
+import re
 
 
 def buscar_musculos():
@@ -59,14 +61,27 @@ def registrar_plano(
                           idProfessor = professor)
     plano.save()
 
-def registrar_aluno(
-        nome_aluno: str,
-):
-    aluno = Aluno(nomeALuno = nome_aluno)
-    aluno.save()
+def listar_profs():
+    return Professor.objects.all()
 
-def registrar_professor(
-        nome_professor: str,
-):
-    professor = Professor(nomeProfessor = nome_professor)
-    professor.save()
+def listar_alunos():
+    return Aluno.objects.all()
+
+def retorna_planos():
+    return PlanoDeTreino.objects.all()
+
+def vincular_plano_de_treino(aluno_id, professor_id):
+    aluno = Aluno.objects.get(id = aluno_id)
+    professor = Professor.objects.get(id = professor_id)
+
+    plano = PlanoDeTreino(idProfessor = professor,
+                        idAluno = aluno,
+                        dataInicio = date.today()
+                        )
+    plano.save()
+
+def mudar_plano(aluno_id, professor_id):
+    aluno = Aluno.objects.get(id = aluno_id)
+    plano = PlanoDeTreino.objects.get(idAluno = aluno)
+    plano.idProfessor = Professor.objects.get(id=professor_id)
+    plano.save()
