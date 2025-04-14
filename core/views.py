@@ -1,13 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.http import HttpRequest
-from alunos.views import alunoPage
-from professores.views import professorPage 
 from django.shortcuts import redirect
 from .dao import *
 from professores.dao import novo_prof
 from professores.dao import deletar_prof
-import secrets
 from loginpage.dao import *
 from professores.dao import verifica_se_existe_professor_com_o_cpf
 from alunos.dao import *
@@ -217,24 +212,6 @@ def del_professor(request):
 def del_aluno(request):
     id = request.POST.get("aluno")
     deletar_aluno(int(id))
-
-def novo_login(request, id_tipo, id_pessoa):
-    if id_tipo == '1':
-        login = request.POST.get("login")
-        senha = request.POST.get("senha")
-
-    if id_tipo == '2': 
-        login = request.POST.get("loginProfessor")
-        senha = request.POST.get("senhaProfessor")
-
-    login = request.POST.get("loginProfessor")
-    senha = request.POST.get("senhaProfessor")
-
-def recepcao_screen(request):
-    if not verifica_se_logado() or  not request.session.get("rec"): return redirect("login")
-    dados ={}
-
-    return render(request, "recepcao.html", dados)
 
 def verifica_se_logado(request):
     token = request.GET.get('token')

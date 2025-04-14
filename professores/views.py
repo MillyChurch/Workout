@@ -1,16 +1,16 @@
 #indexa as urls do projeto, define o que deve ser mostrado quando recebe uma requisição
 
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from .models import Professor
 from core.dao import *
 from .dao import *
+from core.views import verifica_se_logado
 
 
 def professorPage(request):
 
-    if(verifica_se_logado(request)):
+    if(verifica_se_logado(request) and request.session.get('id_tipo') == 2):
         professor_id = request.session.get('id_professor')
         professor = Professor.objects.get(id=professor_id)
         professor_dados = {
@@ -26,7 +26,7 @@ def cadastrar_exercicio_page(request):
     info = ""
     erro = ""
 
-    if(verifica_se_logado(request)):
+    if(verifica_se_logado(request) and request.session.get('id_tipo') == 2):
 
         if request.method == "POST":
             musculo = request.POST.get("musculo")
@@ -52,7 +52,7 @@ def plano_de_treino_page(request):
     erro = ""
     id_professor = request.session.get('id_professor')
 
-    if(verifica_se_logado(request)):
+    if(verifica_se_logado(request) and request.session.get('id_tipo') == 2):
 
         dados = {
             "alunos" : listar_alunos(id_professor),
@@ -115,15 +115,5 @@ def deletar_treino(request):
         if treino.isdigit():
             excluir_treino(treino)
 
-def verifica_se_logado(request):
-    token = request.GET.get('token')
-    token_salvo = request.session.get('token_protegido')
-    
-    if not token or token != token_salvo:
-        return False
-    
-    if request.session.get('id_tipo') != 2:
-        return False
 
-    return True
 

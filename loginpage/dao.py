@@ -1,8 +1,6 @@
 from .models import Usuario
 from professores.models import Professor
 from alunos.models import Aluno
-from alunos.views import alunoPage
-from professores.views import professorPage 
 from .models import TiposDeUsuario
 
 def retorna_usuario_se_existir(usuario_nome: str):

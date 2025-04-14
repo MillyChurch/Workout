@@ -1,9 +1,5 @@
 from django.shortcuts import render
 from .models import Usuario
-from django.http import HttpResponse
-from django.http import HttpRequest
-from alunos.views import alunoPage
-from professores.views import professorPage 
 from django.shortcuts import redirect
 from .dao import *
 import secrets
